@@ -1,0 +1,58 @@
+#!/bin/bash
+#../plotting/plots/80X_2016_RunB2H/zTnP//mupog_IdSip4Iso_IsBDT_jpsi_2208/
+#P=../plotting/plots/80X_2016_RunB2H/zTnP/
+#P=../plotting/plots/94X_2017_RunB2F/zTnP/
+P=/afs/cern.ch/user/t/tjavaid/workspace/Eff_Run2_legacy/CMSSW_10_2_5/plotting/plots/94X_2017_RunB2F/zTnP
+#P=../plotting/plots/94X_201018_RunD/zTnP/
+#IN="mupog_IdSip4Iso_IsBDT_jpsi_2208"
+
+#IN="mupog_IdSip4Iso_IsBDT_jpsi_2308"
+#IN="mupog_IdSip4Iso_IsBDT_jpsi_2708"
+IN="mupog_RecoId_2017_RunB2F_1910"
+
+#IN="mupog_RecoId_2018data_RunD"
+#Q=/eos/user/t/tjavaid/www/2017_TnP/IdSip4Iso_2017_harvest_charmonium
+Q=/eos/user/t/tjavaid/www/2017_TnP/$IN
+#R=/afs/cern.ch/user/t/tjavaid/workspace/CMSSW_10_2_5/plotting/plots/80X_2016_RunB2H/zTnP/
+#R=/afs/cern.ch/user/t/tjavaid/workspace/CMSSW_10_2_5/plotting/plots/94X_2017_RunB2F/zTnP/
+R=/afs/cern.ch/user/t/tjavaid/workspace/Eff_Run2_legacy/CMSSW_10_2_5/plotting/plots/94X_2017_RunB2F/zTnP
+#MEAS="mu_IdSip4Iso"                         ##SIP4............................OK
+MEAS="mu_Loose"                         ##SIP4............................OK
+for sig in JDGauss JGauss JCB; do
+#for sig in JGauss JCB; do
+    for bkg in bern3 bern4 expo bern5 bern7; do
+        for salt in JDGauss JGauss JCB; do
+#        for salt in JGauss JCB; do
+            if [[ "$salt" != "$sig" ]]; then
+            for balt in  bern3 bern4 expo bern5 bern7; do
+                if [[ "$balt" != "$bkg" ]]; then
+		if [[ "$1" != "" ]]; then MEAS="$*"; fi
+		for M in $MEAS; do
+		    case $M in
+			mu_Loose) MODS=" -s "${sig}" -b "${bkg}"  --balt "${balt}" --salt "${salt}" --alt massExtended --alt massReduced --alt binsExtended --alt binsReduced ";   #MCT, expo with no voigt, bern3 as alternate
+			#OUT="mupog_IdSip4Iso_IsBDT_jpsi_2208/IdSip4Iso_2016_harvest_${sig}_${bkg}_${salt}_${balt}_mupogSystsMassBins_2208"
+			#OUT="mupog_IdSip4Iso_IsBDT_jpsi_2308/IdSip4Iso_2016_harvest_${sig}_${bkg}_${salt}_${balt}_mupogSystsMassBins_2308"
+			#OUT="mupog_IdSip4Iso_IsBDT_jpsi_2708/IdSip4Iso_2017_harvest_${sig}_${bkg}_${salt}_${balt}_mupogSystsMassBins_2708"
+			OUT="$IN/Loose_2017_harvest_${sig}_${bkg}_${salt}_${balt}_mupogSystsMassBins_1910"
+                        TIT='Muon IdSip4Iso efficiency' ;;
+    		    esac;
+#                    OPTS=" --doRatio --pdir ${P}/$OUT --idir ${P}/$IN  --rrange 0.95 1.01  --yrange 0.9 1.01 "; XTIT="p_{T} (GeV)"
+#		    OPTS=" --doRatio --pdir ${P}/$OUT --idir ${P}/$IN "; XTIT="p_{T} (GeV)"
+                    #OPTS=" --doRatio --pdir ${P}/$OUT --idir ${P}/$IN  --rrange 0.2 0.81  --yrange 0.1 0.9 "; XTIT="p_{T} (GeV)"
+                    OPTS=" --doRatio --pdir ${P}/$OUT --idir ${P}/$IN  --rrange 0.97 1.01  --yrange 0.9 1.01 "; XTIT="p_{T} (GeV)"
+#		    for BE in barrel endcap; do
+#		        python tnpHarvest.py -N ${M}_${BE} $OPTS $MODS --ytitle "$TIT" --xtit "$XTIT"
+#		    done
+		    python tnpHarvest.py -N ${M}_pt7 $OPTS $MODS --ytitle "$TIT" --xtit "#eta"
+#		    python tnpHarvest.py -N ${M}_pt7_vtx $OPTS $MODS --ytitle "$TIT" --xtit "N(vertices)"
+  		#rsync -av ${R}/$IN/"IdSip4Iso_2016_harvest_${sig}_${bkg}_${salt}_${balt}_mupogSystsMassBins_2208" $Q
+  	#	rsync -av ${R}/$IN/"IdSip4Iso_2016_harvest_${sig}_${bkg}_${salt}_${balt}_mupogSystsMassBins_2308" $Q
+  		#rsync -av ${R}/$IN/"IdSip4Iso_2017_harvest_${sig}_${bkg}_${salt}_${balt}_mupogSystsMassBins_2708" $Q
+  		rsync -av ${R}/$IN/"Loose_2017_harvest_${sig}_${bkg}_${salt}_${balt}_mupogSystsMassBins_1910" $Q
+		done
+		fi;
+done;
+fi;
+done;
+done
+done
