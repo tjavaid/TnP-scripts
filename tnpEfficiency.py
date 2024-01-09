@@ -144,8 +144,22 @@ def makeBackgroundModel(w, model, options):
         return ("backgroundPass", "backgroundFail") 
 
     if model == "cheb":
-        w.factory("RooChebychev::backgroundPass(mass, {a0[0.25,0,0.5], a1[-0.25,-1,0.1],a2[0.,-0.25,0.25]})")
-        w.factory("RooChebychev::backgroundFail(mass, {a0[0.25,0,0.5], a1[-0.25,-1,0.1],a2[0.,-0.25,0.25]})")
+        #w.factory("RooChebychev::backgroundPass(mass, {a0[0.25,0,0.5], a1[-0.25,-1,0.1],a2[0.,-0.25,0.25]})")
+        #w.factory("RooChebychev::backgroundFail(mass, {a0[0.25,0,0.5], a1[-0.25,-1,0.1],a2[0.,-0.25,0.25]})")
+        w.factory("RooChebychev::backgroundPass(mass, {a0[0.25,0,0.5], a1[0,-1,0.1],a2[0.,-0.25,0.25]})")
+        w.factory("RooChebychev::backgroundFail(mass, {a0[0.25,0,0.5], a1[0,-1,0.1],a2[0.,-0.25,0.25]})")
+        return ("backgroundPass", "backgroundFail")
+
+#            "Chebychev::bkgPass(x, {cPass1[0,-1,1], cPass2[0,-1,1]})",
+#            "Chebychev::bkgFail(x, {cFail1[0,-1,1], cFail2[0,-1,1]})",
+
+
+    if model == "cheb2":
+        #w.factory("RooChebychev::backgroundPass(mass, {a0[0.25,0,0.5], a1[-0.25,-1,0.1],a2[0.,-0.25,0.25]})")
+        #w.factory("RooChebychev::backgroundFail(mass, {a0[0.25,0,0.5], a1[-0.25,-1,0.1],a2[0.,-0.25,0.25]})")
+        w.factory("RooChebychev::backgroundPass(mass, {a1[0,-1,0.1],a2[0.,-1.0,1.0]})")
+        w.factory("RooChebychev::backgroundFail(mass, {a1[0,-1,0.1],a2[0.,-1.0,1.0]})")
+#        w.factory("RooChebychev2::backgroundFail(mass, {a0[0.25,0,0.5], a1[0,-1,0.1],a2[0.,-0.25,0.25]})")
         return ("backgroundPass", "backgroundFail")
 
     if model == "cmsShape":
@@ -814,7 +828,7 @@ if __name__ == "__main__":
     #ROOT.gROOT.ProcessLine(".x ~/cpp/tdrstyle.cc")
     ROOT.gROOT.ProcessLine(".x tdrstyle.cc")
 #    ROOT.gROOT.ProcessLine(".x /afs/cern.ch/user/t/tjavaid/Workspace/CMSSW_9_4_0_pre3/src/CMGTools/HToZZ4L/python/scripts/tdrstyle.cc")
-    ROOT.gSystem.Load("libHiggsAnalysisCombinedLimit")
+#    ROOT.gSystem.Load("libHiggsAnalysisCombinedLimit")
 #    if "/functions_cc.so" not in ROOT.gSystem.GetLibraries(): 
         #ROOT.gROOT.ProcessLine(".L %s/src/CMGTools/TTHAnalysis/python/plotter/functions.cc+" % os.environ['CMSSW_BASE']);
 #        ROOT.gROOT.ProcessLine(".L %s/src/functions.cc+" % os.environ['CMSSW_BASE']);
@@ -842,8 +856,9 @@ if __name__ == "__main__":
     effs =  [ makeHistos2D(t,options.num,options.den,options.xvar,options.mvar,options,post=l,reftree=reftree) for (t,l) in trees ]
     if options.request and "bin" in options.request: exit()
     plotEffs(options.name,effs,options)
-    if getattr(effs[0],'counting',None):
-        plotEffs(options.name+"_counting",[e.counting for e in effs],options)
-    if reftree:
-        plotEffs(options.name+"_mcclosure",[effs[1], effs[1].truth],options)
+# TJ temporary commenting
+#    if getattr(effs[0],'counting',None):
+#        plotEffs(options.name+"_counting",[e.counting for e in effs],options)
+#    if reftree:
+#        plotEffs(options.name+"_mcclosure",[effs[1], effs[1].truth],options)
 
