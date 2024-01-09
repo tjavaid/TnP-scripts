@@ -1,4 +1,5 @@
 # Instructions for for setting up and running for low pT ID efficiency measurement using 2022 data
+After logging into the ```ihep (lxslc7.ihep.ac.cn``` machine account, following steps can be followed:
 ## 1. Setup 
 ```
 export SCRAM_ARCH=slc7_amd64_gcc700
