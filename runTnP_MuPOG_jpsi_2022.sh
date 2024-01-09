@@ -3,6 +3,14 @@
 #PDIR="test/"
 PDIR=$1"_TnP"
 if [[ $1 != "" ]]; then echo "PDIR:", $PDIR; fi
+
+declare -A ids
+ids["loose"]="probe_CutBasedIdLoose"
+ids["medium"]="probe_CutBasedIdMedium"
+ids["tight"]="probe_CutBasedIdTight"
+
+id=${ids[$3]}
+echo "ID is : " $id
 JOB="mupog_RecoId" 
 
 #XBINS="[3,4,5,6,7,8,9,10,30]" # POG
@@ -54,8 +62,7 @@ CDEN="$CDEN && probe_isTracker==1 && probe_pt > 2 && abs(probe_dz) < 0.5"
 CDEN="$CDEN && pair_probeMultiplicity==1 && pair_drM1>= 0.3" # pair_probeMultiplicity -> pairs whose probe muon is associated to only one tag muon, pair_drM1-> dR between tag and probe muons
 
 
-#for ID in probe_isLoose ; do
-for ID in probe_CutBasedIdLoose; do
+for ID in $id ; do
  # if [[ "$SEL" != "" ]] && echo $SEL | grep -q -v $ID; then continue; fi
   NUM="$ID"        
   if [[ "$ID" == "Reco" ]]; then   NUM="(Glb || TM)"; fi
@@ -64,8 +71,8 @@ for ID in probe_CutBasedIdLoose; do
 
 echo $NUM
 echo $CDEN
-  #for BMOD in expo  ; do  # other alternate models are bern4, bern5, bern6, bern7, expo , etc....
-  for BMOD in expo bern3 ; do  # other alternate models are bern4, bern5, bern6, bern7, expo , etc....
+  #for BMOD in expo  ; do  # other alternate models are bern4, bern5, bern6, bern7, etc....
+  for BMOD in expo bern3 ; do  # other alternate models are bern4, bern5, bern6, bern7, etc....
 #    for SMOD in JGauss ; do  # other alternate model is  JDGauss JCB
     for SMOD in JCB JGauss; do  # 
 	DEN="$CDEN";

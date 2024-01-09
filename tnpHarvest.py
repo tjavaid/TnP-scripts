@@ -342,13 +342,13 @@ if __name__ == "__main__":
     addTnPHarvestOptions(parser)
     (options, args) = parser.parse_args()
     ROOT.gROOT.SetBatch(True)
-    ROOT.gROOT.ProcessLine(".x ~/cpp/tdrstyle.cc")
+    ROOT.gROOT.ProcessLine(".x tdrstyle.cc")
     ROOT.gStyle.SetOptStat(0)
     if not os.path.exists(options.printDir):
         os.system("mkdir -p %s" % options.printDir)
-        os.system("cp /afs/cern.ch/user/g/gpetrucc/php/index.php  %s/" % options.printDir)
+        os.system("cp index.php  %s/" % options.printDir)
     if not os.path.exists(options.inDir):
-        raise RuntimeError, "Input directory missin"
+        raise RuntimeError, "Input directory missing"
     pieces = options.name.split("_",1)
     pattern = "%s_%%s_%%s_%s" % (pieces[0], pieces[1])
     nominal = pattern % (options.sigModel, options.bkgModel)
