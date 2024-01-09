@@ -2,6 +2,7 @@
 ## 1. Setup 
 ```
 export SCRAM_ARCH=slc7_amd64_gcc700
+source /cvmfs/cms.cern.ch/cmsset_default.sh
 cmsrel CMSSW_10_2_5
 cd CMSSW_10_2_5/src
 cmsenv
