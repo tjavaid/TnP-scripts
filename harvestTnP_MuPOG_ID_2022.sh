@@ -28,7 +28,7 @@ for sig in JGauss JCB; do
 			OUT="$IN/${M}_$1_harvest_${sig}_${bkg}_${salt}_${balt}_mupogSysts"
                         TIT='Muon Id efficiency' ;;
     		    esac;
-                    OPTS=" --doRatio --pdir ${P}/$OUT --idir ${P}/$IN  --rrange 0.97 1.01  --yrange 0.9 1.01 "; XTIT="p_{T} (GeV)"
+                    OPTS=" --doRatio --pdir ${P}/$OUT --idir ${P}/$IN  --rrange 0.97 1.03  --yrange 0.8 1.01 "; XTIT="p_{T} (GeV)"
 		    for BE in barrel endcap ; do
 		        python tnpHarvest.py -N ${M}_${BE} $OPTS $MODS --ytitle "$TIT" --xtit "$XTIT"
 		    done
