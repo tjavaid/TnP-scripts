@@ -1,5 +1,5 @@
 # Instructions for for setting up and running for low pT ID efficiency measurement using 2022 data
-After logging into the ```ihep (lxslc7.ihep.ac.cn)``` machine account, following steps can be followed:
+After logging into the ihep cluster using your account details by doing ```ssh -XY USERNAME@lxlogin.ihep.ac.cn```, following steps can be followed:
 ## 1. Setup 
 ```
 export PATH=/cvmfs/container.ihep.ac.cn/bin/:$PATH
