@@ -79,31 +79,31 @@ echo $CDEN
 	if [ "$2" == "nominal" ] || [ "$2" == "all" ]; then # to execute the nominal part 
 	echo "running fits for the nominal part"
         POST="";
-        python tnpEfficiency.py $PDS -d "abs(probe_eta)>0 && abs(probe_eta)<=1.2 && $DEN" -n "$NUM" $OPTS --x-var probe_pt $XBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_barrel -b $BMOD -s $SMOD $MASS --xtitle "p_{T} (GeV)";
-        python tnpEfficiency.py $PDS -d "abs(probe_eta)>1.2 && abs(probe_eta)<=2.4 && $DEN" -n "$NUM" $OPTS --x-var probe_pt $XBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_endcap -b $BMOD -s $SMOD $MASS --xtitle "p_{T} (GeV)";
+#        python tnpEfficiency.py $PDS -d "abs(probe_eta)>0 && abs(probe_eta)<=1.2 && $DEN" -n "$NUM" $OPTS --x-var probe_pt $XBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_barrel -b $BMOD -s $SMOD $MASS --xtitle "p_{T} (GeV)";
+#        python tnpEfficiency.py $PDS -d "abs(probe_eta)>1.2 && abs(probe_eta)<=2.4 && $DEN" -n "$NUM" $OPTS --x-var probe_pt $XBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_endcap -b $BMOD -s $SMOD $MASS --xtitle "p_{T} (GeV)";
         python tnpEfficiency.py $PDS -d "probe_pt > 2 && $DEN" -n "$NUM" $OPTS --x-var probe_eta $EBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_pt2   -b $BMOD -s $SMOD $MASS  --xtitle "#eta" --yrange 0.8 1.1; 
 	fi
 ######  adding more  alternate choices ((than the signal and background PDFs)) for systematics purposes
 	if [ "$2" == "syst" ] || [ "$2" == "all" ]; then 
 	echo "running fits for the syst. part";
         MASS2=" -m pair_mass 20,2.95,3.25"; POST="_massReduced";
-        python tnpEfficiency.py $PDS -d "abs(probe_eta)>0 && abs(probe_eta)<=1.2 && $DEN" -n "$NUM" $OPTS --x-var probe_pt $XBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_barrel -b $BMOD -s $SMOD $MASS2 --xtitle "p_{T} (GeV)";
-        python tnpEfficiency.py $PDS -d "abs(probe_eta)>1.2 && abs(probe_eta)<=2.4 && $DEN" -n "$NUM" $OPTS --x-var probe_pt $XBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_endcap -b $BMOD -s $SMOD $MASS2 --xtitle "p_{T} (GeV)";
+#        python tnpEfficiency.py $PDS -d "abs(probe_eta)>0 && abs(probe_eta)<=1.2 && $DEN" -n "$NUM" $OPTS --x-var probe_pt $XBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_barrel -b $BMOD -s $SMOD $MASS2 --xtitle "p_{T} (GeV)";
+#        python tnpEfficiency.py $PDS -d "abs(probe_eta)>1.2 && abs(probe_eta)<=2.4 && $DEN" -n "$NUM" $OPTS --x-var probe_pt $XBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_endcap -b $BMOD -s $SMOD $MASS2 --xtitle "p_{T} (GeV)";
         python tnpEfficiency.py $PDS -d "probe_pt > 2 && $DEN" -n "$NUM" $OPTS --x-var probe_eta $EBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_pt2   -b $BMOD -s $SMOD $MASS2  --xtitle "#eta" ;
 #
         MASS2=" -m pair_mass 20,2.85,3.35"; POST="_massExtended"  # with extended mass range (default is 20,2.9,3.3)
-        python tnpEfficiency.py $PDS -d "abs(probe_eta)>0 && abs(probe_eta)<=1.2 && $DEN" -n "$NUM" $OPTS --x-var probe_pt $XBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_barrel -b $BMOD -s $SMOD $MASS2 --xtitle "p_{T} (GeV)";
-        python tnpEfficiency.py $PDS -d "abs(probe_eta)>1.2 && abs(probe_eta)<=2.4 && $DEN" -n "$NUM" $OPTS --x-var probe_pt $XBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_endcap -b $BMOD -s $SMOD $MASS2 --xtitle "p_{T} (GeV)";
+#        python tnpEfficiency.py $PDS -d "abs(probe_eta)>0 && abs(probe_eta)<=1.2 && $DEN" -n "$NUM" $OPTS --x-var probe_pt $XBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_barrel -b $BMOD -s $SMOD $MASS2 --xtitle "p_{T} (GeV)";
+#        python tnpEfficiency.py $PDS -d "abs(probe_eta)>1.2 && abs(probe_eta)<=2.4 && $DEN" -n "$NUM" $OPTS --x-var probe_pt $XBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_endcap -b $BMOD -s $SMOD $MASS2 --xtitle "p_{T} (GeV)";
         python tnpEfficiency.py $PDS -d "probe_pt > 2 && $DEN" -n "$NUM" $OPTS --x-var probe_eta $EBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_pt2   -b $BMOD -s $SMOD $MASS2  --xtitle "#eta" ;
 #
         MASS2=" -m pair_mass 15,2.9,3.3"; POST="_binsReduced"  # with reduced bins in mass range (default is 20,2.9,3.3)
-        python tnpEfficiency.py $PDS -d "abs(probe_eta)>0 && abs(probe_eta)<=1.2 && $DEN" -n "$NUM" $OPTS --x-var probe_pt $XBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_barrel -b $BMOD -s $SMOD $MASS2 --xtitle "p_{T} (GeV)";
-        python tnpEfficiency.py $PDS -d "abs(probe_eta)>1.2 && abs(probe_eta)<=2.4 && $DEN" -n "$NUM" $OPTS --x-var probe_pt $XBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_endcap -b $BMOD -s $SMOD $MASS2 --xtitle "p_{T} (GeV)";
+#        python tnpEfficiency.py $PDS -d "abs(probe_eta)>0 && abs(probe_eta)<=1.2 && $DEN" -n "$NUM" $OPTS --x-var probe_pt $XBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_barrel -b $BMOD -s $SMOD $MASS2 --xtitle "p_{T} (GeV)";
+#        python tnpEfficiency.py $PDS -d "abs(probe_eta)>1.2 && abs(probe_eta)<=2.4 && $DEN" -n "$NUM" $OPTS --x-var probe_pt $XBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_endcap -b $BMOD -s $SMOD $MASS2 --xtitle "p_{T} (GeV)";
         python tnpEfficiency.py $PDS -d "probe_pt > 2 && $DEN" -n "$NUM" $OPTS --x-var probe_eta $EBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_pt2   -b $BMOD -s $SMOD $MASS2  --xtitle "#eta" ;
 #
         MASS2=" -m pair_mass 30,2.9,3.3"; POST="_binsExtended"  # with extended bins in mass range (default is 20,2.9,3.3)
-        python tnpEfficiency.py $PDS -d "abs(probe_eta)>0 && abs(probe_eta)<=1.2 && $DEN" -n "$NUM" $OPTS --x-var probe_pt $XBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_barrel -b $BMOD -s $SMOD $MASS2 --xtitle "p_{T} (GeV)";
-        python tnpEfficiency.py $PDS -d "abs(probe_eta)>1.2 && abs(probe_eta)<=2.4 && $DEN" -n "$NUM" $OPTS --x-var probe_pt $XBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_endcap -b $BMOD -s $SMOD $MASS2 --xtitle "p_{T} (GeV)";
+#        python tnpEfficiency.py $PDS -d "abs(probe_eta)>0 && abs(probe_eta)<=1.2 && $DEN" -n "$NUM" $OPTS --x-var probe_pt $XBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_barrel -b $BMOD -s $SMOD $MASS2 --xtitle "p_{T} (GeV)";
+#        python tnpEfficiency.py $PDS -d "abs(probe_eta)>1.2 && abs(probe_eta)<=2.4 && $DEN" -n "$NUM" $OPTS --x-var probe_pt $XBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_endcap -b $BMOD -s $SMOD $MASS2 --xtitle "p_{T} (GeV)";
         python tnpEfficiency.py $PDS -d "probe_pt > 2 && $DEN" -n "$NUM" $OPTS --x-var probe_eta $EBINS -N mu_${SMOD}_${BMOD}${POST}_${ID}_pt2   -b $BMOD -s $SMOD $MASS2  --xtitle "#eta" ;
 	fi; 
     done    

@@ -9,8 +9,16 @@ source /cvmfs/cms.cern.ch/cmsset_default.sh
 cmsrel CMSSW_10_2_5
 cd CMSSW_10_2_5/src
 cmsenv
-git clone -b CMS-China-WC2-2022data https://github.com/tjavaid/TnP-scripts.git
+git clone -b CMS-China-WC3-2022data https://github.com/tjavaid/TnP-scripts.git
+OR
+git clone -b CMS-China-WC3-2022data git@github.com:tjavaid/TnP-scripts.git
+
+
 git clone -b 102x https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit.git HiggsAnalysis/CombinedLimit
+OR
+git clone -b 102x git@github.com:cms-analysis/HiggsAnalysis-CombinedLimit.git HiggsAnalysis/CombinedLimit
+
+
 cd $CMSSW_BASE/src/HiggsAnalysis/CombinedLimit
 git fetch origin
 git checkout v8.2.0
